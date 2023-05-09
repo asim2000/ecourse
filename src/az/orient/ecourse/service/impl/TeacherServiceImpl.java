@@ -1,9 +1,10 @@
-package az.orient.ecourse.service;
+package az.orient.ecourse.service.impl;
 
 import az.orient.ecourse.dao.TeacherDao;
 import az.orient.ecourse.dao.impl.TeacherDaoImpl;
 import az.orient.ecourse.model.Teacher;
 import az.orient.ecourse.model.TeacherLesson;
+import az.orient.ecourse.service.TeacherService;
 
 import java.util.List;
 
@@ -21,5 +22,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<TeacherLesson> getTeacherLesson() throws Exception {
         return teacherDao.getTeacherLesson();
+    }
+
+    @Override
+    public List<Teacher> getTeacherListByLessonId(Long lessonId) throws Exception {
+        return teacherDao.getTeacherListByLessonId(lessonId);
     }
 }

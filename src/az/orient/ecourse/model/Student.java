@@ -62,13 +62,6 @@ public class Student extends Course {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", dob=" + dob +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", pin='" + pin + '\'' +
-                '}';
+        return name+" "+surname;
     }
 }

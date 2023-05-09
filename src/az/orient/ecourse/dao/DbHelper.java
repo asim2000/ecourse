@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class DbHelper {
 
-    public static Connection getConnection() throws Exception {
+    public static Connection getConnection() throws Exception { // asim
         Properties p = new Properties();
         p.load(new FileReader("config.properties"));
         Class.forName(p.getProperty("db.driver"));
