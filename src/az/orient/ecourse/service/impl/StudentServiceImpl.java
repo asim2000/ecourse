@@ -1,7 +1,9 @@
-package az.orient.ecourse.service;
+package az.orient.ecourse.service.impl;
 
 import az.orient.ecourse.dao.StudentDao;
 import az.orient.ecourse.model.Student;
+import az.orient.ecourse.model.StudentTeacherLesson;
+import az.orient.ecourse.service.StudentService;
 
 import java.util.List;
 
@@ -41,5 +43,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> searchStudentData(String keyword) throws Exception {
         return studentDao.searchStudentData(keyword);
+    }
+
+    @Override
+    public List<Student> getStudentListByLessonIdAndTeacherId(Long lessonId, Long teacherId) throws Exception {
+        return studentDao.getStudentListByLessonIdAndTeacherId(lessonId,teacherId);
+    }
+
+    @Override
+    public StudentTeacherLesson getStudentTeacherLessonBySIdAndTIdAndLId(Long studentId, Long teacherId, Long lessonId) throws Exception {
+         return studentDao.getStudentTeacherLessonBySIdAndTIdAndLId(studentId, teacherId, lessonId);
     }
 }

@@ -10,6 +10,16 @@ public class Teacher extends Course {
     private String phone;
     private String pin;
     private int workExperience;
+    
+    public Teacher(){
+        
+    }
+    public Teacher(Long id,String name,String surname){
+        super.setId(id);
+        this.name = name;
+        this.surname = surname;
+        
+    }
 
     public String getName() {
         return name;
@@ -69,14 +79,6 @@ public class Teacher extends Course {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", dob=" + dob +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", pin='" + pin + '\'' +
-                ", workExperience=" + workExperience +
-                '}';
+        return name+" "+surname;
     }
 }

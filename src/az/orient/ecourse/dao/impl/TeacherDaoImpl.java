@@ -64,4 +64,26 @@ public class TeacherDaoImpl implements TeacherDao {
         }
         return teacherLessonList;
     }
+
+    @Override
+    public List<Teacher> getTeacherListByLessonId(Long lessonId) throws Exception {
+        List<Teacher> teacherList = new ArrayList<>();
+        String sql = "select t.id,t.name,t.surname from teacher_lesson tl\n" +
+                "inner join teacher t on tl.teacher_id = t.id\n" +
+                "inner join lesson l on tl.lesson_id = l.id\n" +
+                "where tl.active = 1 and l.id = ?";
+        try(Connection connection = DbHelper.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1,lessonId);
+            ResultSet resultSet = ps.executeQuery();
+            while(resultSet.next()){
+                Teacher teacher = new Teacher();
+                teacher.setId(resultSet.getLong("id"));
+                teacher.setName(resultSet.getString("name"));
+                teacher.setSurname(resultSet.getString("surname"));
+                teacherList.add(teacher);
+            }
+        }
+        return teacherList;
+    }
 }
