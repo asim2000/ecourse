@@ -8,6 +8,7 @@ package az.orient.ecourse.gui;
 import az.orient.ecourse.model.Payment;
 import az.orient.ecourse.model.Student;
 import az.orient.ecourse.model.Teacher;
+import az.orient.ecourse.model.User;
 import az.orient.ecourse.service.LessonService;
 import az.orient.ecourse.service.PaymentService;
 import az.orient.ecourse.service.StudentService;
@@ -28,18 +29,21 @@ public class MainFrame extends javax.swing.JFrame {
     private TeacherService teacherService;
     private LessonService lessonService;
     private PaymentService paymentService;
-    private String globBtnName = null;
+    private User user;
+    private String globBtnName = "";
 
     public MainFrame() {
         initComponents();
     }
 
-    public MainFrame(StudentService studentService, TeacherService teacherService, LessonService lessonService, PaymentService paymentService) {
+    public MainFrame(StudentService studentService, TeacherService teacherService, LessonService lessonService, PaymentService paymentService, User user) {
         this();
         this.studentService = studentService;
         this.teacherService = teacherService;
         this.lessonService = lessonService;
         this.paymentService = paymentService;
+        this.user = user;
+        grantUser();
     }
 
     /**
@@ -60,11 +64,16 @@ public class MainFrame extends javax.swing.JFrame {
         newBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         delBtn = new javax.swing.JButton();
+        keywordTxt = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        fullnameLbl = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -116,7 +125,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(lessonDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(paymentDataBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -142,6 +151,35 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        keywordTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keywordTxtActionPerformed(evt);
+            }
+        });
+        keywordTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                keywordTxtKeyReleased(evt);
+            }
+        });
+
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
+        logoutBtn.setText("Log Out");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Welcome,");
+
+        fullnameLbl.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -153,17 +191,34 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(206, 206, 206)
+                .addComponent(keywordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fullnameLbl)
+                .addGap(58, 58, 58)
+                .addComponent(logoutBtn)
+                .addGap(53, 53, 53))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(delBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(keywordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchBtn)
+                        .addComponent(logoutBtn)
+                        .addComponent(jLabel1)
+                        .addComponent(fullnameLbl))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(delBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -198,7 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -206,13 +261,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -234,8 +289,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_paymentDataBtnActionPerformed
 
     private void studentDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentDataBtnActionPerformed
-        globBtnName = "student";
-        showStudentData();
+        try {
+            globBtnName = "student";
+            showStudentData(studentService.getStudentList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_studentDataBtnActionPerformed
 
     private void teacherDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherDataBtnActionPerformed
@@ -260,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
             case "lesson":
                 break;
             case "payment":
-                NewPaymentFrame newPaymentFrame = new NewPaymentFrame(studentService,teacherService,lessonService,paymentService);
+                NewPaymentFrame newPaymentFrame = new NewPaymentFrame(studentService, teacherService, lessonService, paymentService);
                 newPaymentFrame.setVisible(true);
                 break;
             default:
@@ -274,8 +333,26 @@ public class MainFrame extends javax.swing.JFrame {
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         int rowIndex = tbl.getSelectedRow();
         Long selectedRow = (Long) tbl.getValueAt(rowIndex, 0);
-        EditStudentFrame editStudentFrame = new EditStudentFrame(selectedRow, studentService);
-        editStudentFrame.setVisible(true);
+
+        switch (globBtnName) {
+            case "student":
+                EditStudentFrame editStudentFrame = new EditStudentFrame(selectedRow, studentService);
+                editStudentFrame.setVisible(true);
+                break;
+            case "teacher":
+
+                break;
+            case "lesson":
+                break;
+            case "payment":
+                EditPaymentFrame editPaymentFrame = new EditPaymentFrame(selectedRow, studentService, teacherService, lessonService, paymentService);
+                editPaymentFrame.setVisible(true);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Please , select menu!", "Warning", JOptionPane.WARNING_MESSAGE);
+
+        }
+
 
     }//GEN-LAST:event_editBtnActionPerformed
 
@@ -294,7 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
             if (isDelete == JOptionPane.YES_OPTION) {
                 studentService.deleteStudent(selectedRow);
                 JOptionPane.showMessageDialog(null, "Student has been successfully deleted!");
-                showStudentData();
+                showStudentData(studentService.getStudentList());
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -302,23 +379,67 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_delBtnActionPerformed
 
+    private void keywordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keywordTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_keywordTxtActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        try {
+            String keyword = keywordTxt.getText();
+            switch (globBtnName) {
+                case "student":
+                    List<Student> studentList = studentService.searchStudentData(keyword);
+                    showStudentData(studentList);
+                    break;
+                case "teacher":
+
+                    break;
+                case "lesson":
+                    break;
+                case "payment":
+
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Please , select menu!", "Warning", JOptionPane.WARNING_MESSAGE);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void keywordTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keywordTxtKeyReleased
+        searchBtnActionPerformed(null);
+    }//GEN-LAST:event_keywordTxtKeyReleased
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        LoginFrame loginFrame = new LoginFrame(studentService, teacherService, lessonService, paymentService);
+        loginFrame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logoutBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton delBtn;
     private javax.swing.JButton editBtn;
+    private javax.swing.JLabel fullnameLbl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField keywordTxt;
     private javax.swing.JButton lessonDataBtn;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JButton newBtn;
     private javax.swing.JButton paymentDataBtn;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JButton studentDataBtn;
     private javax.swing.JTable tbl;
     private javax.swing.JButton teacherDataBtn;
     // End of variables declaration//GEN-END:variables
 
-    private void showStudentData() {
+    private void showStudentData(List<Student> studentList) {
         try {
             DefaultTableModel studentTable = new DefaultTableModel() {
 
@@ -336,7 +457,7 @@ public class MainFrame extends javax.swing.JFrame {
             studentTable.addColumn("Date of birth");
             studentTable.addColumn("Phone");
             studentTable.addColumn("Pin");
-            List<Student> studentList = studentService.getStudentList();
+            //      List<Student> studentList = studentService.getStudentList();
             for (Student student : studentList) {
                 Object[] data = new Object[]{
                     student.getId(), student.getName(), student.getSurname(), student.getAddress(),
@@ -417,5 +538,30 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void showLessonData() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void visibility(boolean isVisibility) {
+        newBtn.setVisible(isVisibility);
+        editBtn.setVisible(isVisibility);
+        delBtn.setVisible(isVisibility);
+    }
+
+    private void grantUser() {
+        try {
+            if (user.getUserRole().getName().equalsIgnoreCase("role_student")) {
+               Student student = studentService.getStudentByUserId(user.getId());
+               fullnameLbl.setText(student.getName()+" "+student.getSurname());
+               visibility(false);
+            } else if (user.getUserRole().getName().equalsIgnoreCase("role_teacher")) {
+              Teacher teacher = teacherService.getTeacherByUserId(user.getId());
+              fullnameLbl.setText(teacher.getName()+" "+teacher.getSurname());
+              visibility(false);
+            } else {
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

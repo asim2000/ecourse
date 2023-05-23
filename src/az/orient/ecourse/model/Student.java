@@ -11,6 +11,8 @@ public class Student extends Course {
     private String address;
     private String pin;
 
+    private User user;
+
     public String getName() {
         return name;
     }
@@ -59,9 +61,25 @@ public class Student extends Course {
         this.pin = pin;
     }
 
-
     @Override
     public String toString() {
-        return name+" "+surname;
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dob=" + dob +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", pin='" + pin + '\'' +
+                ", user=" + user +
+                '}';
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

@@ -10,6 +10,8 @@ public class Teacher extends Course {
     private String phone;
     private String pin;
     private int workExperience;
+
+    private User user;
     
     public Teacher(){
         
@@ -79,6 +81,24 @@ public class Teacher extends Course {
 
     @Override
     public String toString() {
-        return name+" "+surname;
+        return "Teacher{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dob=" + dob +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", pin='" + pin + '\'' +
+                ", workExperience=" + workExperience +
+                ", user=" + user +
+                '}';
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

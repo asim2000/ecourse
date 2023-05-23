@@ -86,4 +86,26 @@ public class TeacherDaoImpl implements TeacherDao {
         }
         return teacherList;
     }
+
+    @Override
+    public Teacher getTeacherByUserId(Long userId) throws Exception {
+        Teacher teacher = new Teacher();
+        String sql = "select * from teacher where active=1 and user_id = ?";
+        try(Connection connection = DbHelper.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+            preparedStatement.setLong(1,userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                teacher.setId(resultSet.getLong("id"));
+                teacher.setName(resultSet.getString("name"));
+                teacher.setSurname(resultSet.getString("surname"));
+                teacher.setDob(resultSet.getDate("dob"));
+                teacher.setAddress(resultSet.getString("address"));
+                teacher.setPhone(resultSet.getString("phone"));
+                teacher.setPin(resultSet.getString("pin"));
+                teacher.setWorkExperience(resultSet.getInt("work_experience"));
+            }
+        }
+        return teacher;
+    }
 }

@@ -8,6 +8,7 @@ import az.orient.ecourse.dao.impl.LessonDaoImpl;
 import az.orient.ecourse.dao.impl.PaymentDaoImpl;
 import az.orient.ecourse.dao.impl.StudentDaoImpl;
 import az.orient.ecourse.dao.impl.TeacherDaoImpl;
+import az.orient.ecourse.gui.LoginFrame;
 import az.orient.ecourse.gui.MainFrame;
 import az.orient.ecourse.service.LessonService;
 import az.orient.ecourse.service.PaymentService;
@@ -36,7 +37,7 @@ public class MainClass {
             LessonService lessonService = new LessonServiceImpl(lessonDao);
             PaymentDao paymentDao = new PaymentDaoImpl();
             PaymentService paymentService = new PaymentServiceImpl(paymentDao);
-            MainFrame mainFrame = new MainFrame(studentService,teacherService,lessonService,paymentService);
+            LoginFrame mainFrame = new LoginFrame(studentService,teacherService,lessonService,paymentService);
             mainFrame.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();

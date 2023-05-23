@@ -13,4 +13,5 @@ public interface TeacherDao {
     
     List<Teacher> getTeacherListByLessonId(Long lessonId) throws Exception;
 
+    Teacher getTeacherByUserId(Long userId) throws Exception;
 }

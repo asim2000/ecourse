@@ -23,4 +23,6 @@ public interface StudentService {
 
     StudentTeacherLesson getStudentTeacherLessonBySIdAndTIdAndLId(Long studentId, Long teacherId, Long lessonId) throws Exception;
 
+    Student getStudentByUserId(Long userId) throws Exception;
+
 }
