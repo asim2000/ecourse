@@ -32,6 +32,7 @@ public class Lesson extends Course {
 
     @Override
     public String toString() {
-        return name+" / "+price;
+        return name;
+
     }
 }

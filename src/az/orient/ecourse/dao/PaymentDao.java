@@ -9,5 +9,7 @@ public interface PaymentDao {
     List<Payment> getPaymentList() throws Exception;
     
     void addPayment(Payment payment) throws Exception;
+    
+    Payment getPaymentById(Long paymentId) throws Exception;
 
 }

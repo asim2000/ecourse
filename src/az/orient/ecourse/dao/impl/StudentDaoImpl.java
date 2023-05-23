@@ -171,4 +171,27 @@ public class StudentDaoImpl implements StudentDao {
          }
          return studentTeacherLesson;
     }
+
+    @Override
+    public Student getStudentByUserId(Long userId) throws Exception {
+        Student student = new Student();
+        String sql = "select * from qrup58db.student s\n" +
+                "where s.active = 1 and s.user_id = ?";
+        try (Connection c = DbHelper.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setLong(1,userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                student.setId(rs.getLong("id"));
+                student.setName(rs.getString("name"));
+                student.setSurname(rs.getString("surname"));
+                student.setDob(rs.getDate("dob"));
+                student.setAddress(rs.getString("address"));
+                student.setPhone(rs.getString("phone"));
+                student.setPin(rs.getString("pin"));
+            } else {
+                student = null;
+            }
+        }
+        return student;
+    }
 }

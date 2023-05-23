@@ -54,4 +54,9 @@ public class StudentServiceImpl implements StudentService {
     public StudentTeacherLesson getStudentTeacherLessonBySIdAndTIdAndLId(Long studentId, Long teacherId, Long lessonId) throws Exception {
          return studentDao.getStudentTeacherLessonBySIdAndTIdAndLId(studentId, teacherId, lessonId);
     }
+
+    @Override
+    public Student getStudentByUserId(Long userId) throws Exception {
+        return studentDao.getStudentByUserId(userId);
+    }
 }

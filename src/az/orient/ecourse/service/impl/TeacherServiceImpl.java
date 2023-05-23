@@ -28,4 +28,9 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> getTeacherListByLessonId(Long lessonId) throws Exception {
         return teacherDao.getTeacherListByLessonId(lessonId);
     }
+
+    @Override
+    public Teacher getTeacherByUserId(Long userId) throws Exception {
+        return teacherDao.getTeacherByUserId(userId);
+    }
 }
